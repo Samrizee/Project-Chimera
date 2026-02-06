@@ -51,7 +51,7 @@ All external API calls MUST go through MCP servers.
 - Direct network calls to third-party APIs from agent code are forbidden unless routed
   through MCP.
 - MCP integrations MUST be treated as contracts: inputs/outputs must be validated and
-  failures handled safely (no “best effort” publishing/spending).
+  failures handled safely (no "best effort" publishing/spending).
 
 ### IV. Multi-Agent Architecture Discipline (FastRender Pattern)
 
@@ -91,12 +91,14 @@ and version-controlled.
 - **Documentation**: Architecture changes MUST be reflected in the relevant docs/specs.
 
 ## Governance
+
 <!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
 This constitution is the highest-level set of engineering and safety rules for Chimera.
 If another document conflicts with it, this document wins.
 
 Amendments:
+
 - Any amendment MUST update the version and `Last Amended` date.
 - Versioning follows semantic versioning:
   - MAJOR: backward-incompatible governance changes (removals/redefinitions)
@@ -106,7 +108,8 @@ Amendments:
   referenced spec/plan docs.
 
 Compliance:
-- Plans SHOULD include a “Constitution Check” gate for applicable principles.
+
+- Plans SHOULD include a "Constitution Check" gate for applicable principles.
 - Reviews MUST explicitly check: HITL compliance, MCP-only external I/O, secret handling,
   and Coinbase AgentKit budget governor enforcement (where applicable).
 
