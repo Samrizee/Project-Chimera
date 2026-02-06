@@ -1,0 +1,19 @@
+review_policy:
+  reviewer: "AI"
+  checks:
+    - name: Spec Alignment
+      description: >
+        Ensure all new code follows the technical.md specification.
+        Verify API contracts, function signatures, data structures, and test coverage.
+    - name: Security Vulnerabilities
+      description: >
+        Scan for common security risks such as:
+        - Hardcoded credentials
+        - Unsafe system calls
+        - Input validation issues
+        - Insecure network calls
+  report_format: markdown
+  fail_on_violation: true
+  notify:
+    channels:
+      - slack: "#dev-reviews"

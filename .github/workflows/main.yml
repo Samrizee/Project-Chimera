@@ -1,0 +1,46 @@
+name: CI/CD - Test & Review
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Tests in Docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t ai_swarm .
+
+      - name: Run tests inside Docker
+        run: docker run --rm -v ${{ github.workspace }}:/app ai_swarm make test-docker
+
+  lint:
+    name: Lint & Type Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dev dependencies
+        run: pip install ruff mypy
+
+      - name: Run Lint & Type Checks
+        run: |
+          make lint

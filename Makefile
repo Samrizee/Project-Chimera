@@ -1,4 +1,8 @@
-.PHONY: install test lint clean providers presets music video help
+.PHONY: install test lint clean providers presets \
+        music-jazz music-blues music-ethiopian music-cinematic music-electronic music-lofi music-custom music-minimax \
+        video-nature video-space video-urban video-fantasy video-custom video-kling \
+        help jobs jobs-stats jobs-sync
+
 
 # =========================================
 # AI Content Generation Package
@@ -8,9 +12,15 @@
 install:
 	uv sync
 	@echo "✅ ai-content package installed"
+install-docker:
+	docker run --rm -it -v $(PWD):/app ai_swarm uv sync
+	@echo "✅ ai-content package installed"
 
-test:
+test-local:
 	uv run pytest tests/
+
+test-docker:
+	docker run --rm -it -v $(PWD):/app ai_swarm pytest tests/
 
 lint:
 	uv run ruff check src/

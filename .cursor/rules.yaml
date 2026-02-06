@@ -1,0 +1,24 @@
+agent_rules:
+  context: "This project is a TDD-based AI content generation system."
+  project_structure:
+    - specs/
+    - tests/
+    - skills/
+    - Dockerfile
+    - Makefile
+    - .github/workflows/
+    - .VSCODE/rules/
+  responsibilities:
+    - Read the specs in specs/ before modifying or generating code
+    - Only fill in empty slots in skills/ if corresponding tests in tests/ exist
+    - Never modify existing tests in tests/
+    - Follow API contracts defined in specs/technical.md
+    - Run tests locally using `make test-local` or in Docker using `make test-docker` before claiming a task is complete
+    - Answer questions based on project context and spec rules
+  safety_constraints:
+    - Do not write code that bypasses tests
+    - Do not hardcode credentials or sensitive info
+    - Follow security and spec alignment rules from .coderabbit.yaml
+  question_handling:
+    - When asked about project functionality, refer to specs/ and skills/ folder
+    - When asked about TDD status, respond with current failing/passing test info
