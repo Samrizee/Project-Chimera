@@ -3,3 +3,7 @@ redis>=5.0
 python-dotenv>=1.0
 mcp>=1.0.0
 httpx>=0.24.0
+streamlit>=1.30.0
+coinbase-agentkit>=0.0.1
+cdp-sdk>=0.0.1
+langchain>=0.1.0

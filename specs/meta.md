@@ -1,6 +1,6 @@
 # Project Chimera – Master Specification
 
-Project Chimera is an autonomous multi-agent influencer network designed to research trends, generate content, and manage engagement and commerce at scale.
+Project Chimera is an autonomous multi-agent influencer network designed to research trends, generate content, and manage engagement and money at scale.
 
 ## Core Principles
 
@@ -12,7 +12,7 @@ Project Chimera is an autonomous multi-agent influencer network designed to rese
 
 ## Architecture Direction
 
-- Hierarchical Swarm agent pattern (Planner–Worker–Judge)
+- Hierarchical Swarm agent pattern (Planner–Worker–judgment)
 - Parallel task execution with fault isolation
 - Confidence-based approval routing
 

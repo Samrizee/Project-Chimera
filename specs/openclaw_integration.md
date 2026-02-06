@@ -22,7 +22,7 @@ All OpenClaw communications MUST route through MCP servers and MUST be fully aud
    Chimera SHALL expose only declared capabilities and SHALL never leak secrets or internal state.
 
 3. Deterministic Governance  
-   All externally sourced tasks SHALL pass through the same Planner → Judge → HITL policies as internal tasks.
+   All externally sourced tasks SHALL pass through the same Planner → judgment → HITL policies as internal tasks.
 
 4. Auditability  
    Every OpenClaw message SHALL be logged with correlation IDs.

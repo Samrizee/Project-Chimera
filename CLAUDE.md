@@ -8,7 +8,7 @@ The system uses a Hierarchical Swarm architecture with:
 
 - Planner agents
 - Worker agents
-- Judge agents
+- judgment agents
 - An Orchestrator enforcing governance
 
 All external interactions MUST route through MCP servers.

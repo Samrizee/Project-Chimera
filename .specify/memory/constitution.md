@@ -16,8 +16,8 @@ SYNC IMPACT REPORT
 
 **Project Type**: Multi-agent system for autonomous AI influencers  
 **Business Goal**: Create digital entities that autonomously research trends, generate multimedia content, and manage social & economic engagement  
-**Core Architecture**: Hierarchical Swarm (Planner–Worker–Judge) using the FastRender pattern  
-**Key Technologies**: Model Context Protocol (MCP) for all external APIs, OpenClaw for agent-to-agent communication, Coinbase AgentKit for agentic commerce
+**Core Architecture**: Hierarchical Swarm (Planner–Worker–judgment) using the FastRender pattern  
+**Key Technologies**: Model Context Protocol (MCP) for all external APIs, OpenClaw for agent-to-agent communication, Coinbase AgentKit for agentic money
 
 ## Core Principles
 
@@ -25,8 +25,8 @@ SYNC IMPACT REPORT
 
 Chimera MUST prioritize safety over autonomy.
 
-- All content and actions MUST be evaluated by a Judge before execution/publishing.
-- HITL escalation MUST be enforced using tiered thresholds based on Judge confidence:
+- All content and actions MUST be evaluated by a judgment before execution/publishing.
+- HITL escalation MUST be enforced using tiered thresholds based on judgment confidence:
   - High confidence: auto-approve is allowed only for non-sensitive actions
   - Medium confidence: asynchronous human review is required
   - Low confidence: the agent MUST retry/refine and/or route to human review
@@ -55,12 +55,12 @@ All external API calls MUST go through MCP servers.
 
 ### IV. Multi-Agent Architecture Discipline (FastRender Pattern)
 
-Chimera MUST follow the Hierarchical Swarm pattern (Planner–Worker–Judge) and use
+Chimera MUST follow the Hierarchical Swarm pattern (Planner–Worker–judgment) and use
 OpenClaw for agent-to-agent communication.
 
 - Planners own decomposition, prioritization, and assignment.
 - Workers execute specialized tasks and MUST be treated as isolated/fault-contained.
-- Judges gate quality and safety, producing confidence and rationale where possible.
+- judgments gate quality and safety, producing confidence and rationale where possible.
 - The orchestrator MUST make escalation decisions deterministic and policy-driven.
 
 ### V. Strict Spec-Driven Development (SDD)
@@ -79,7 +79,7 @@ and version-controlled.
 - **Secrets**: No hardcoded secrets. Secrets MUST NOT be committed to the repository.
   Secrets MUST be managed via secure configuration and be revocable/rotatable.
 - **External I/O**: All external API calls MUST go through MCP servers (Principle III).
-- **Agentic commerce**: All financial actions MUST use non-custodial wallets via
+- **Agentic money**: All financial actions MUST use non-custodial wallets via
   Coinbase AgentKit and MUST enforce strict budget governors.
 - **Auditability**: Publishing and financial actions MUST be auditable (who/what/why/when).
 

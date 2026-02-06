@@ -36,7 +36,7 @@ Given that feature description, do this:
    - Examples:
      - "I want to add user authentication" → "user-auth"
      - "Implement OAuth2 integration for the API" → "oauth2-api-integration"
-     - "Create a dashboard for analytics" → "analytics-dashboard"
+     - "Create a Dashboard for analytics" → "analytics-Dashboard"
      - "Fix payment processing timeout bug" → "fix-payment-timeout"
 
 2. **Check for existing branches before creating new one**:

@@ -3,9 +3,9 @@
 
 **Project Type**: Multi-agent system for autonomous AI influencers  
 **Business Goal**: Create digital entities that autonomously research trends, generate multimedia content, and manage social & economic engagement  
-**Core Architecture**: Hierarchical Swarm (FastRender) using Planner–Worker–Judge roles  
+**Core Architecture**: Hierarchical Swarm (FastRender) using Planner–Worker–judgment roles  
 **External Integration Standard**: All external API calls MUST go through MCP servers  
-**Commerce Standard**: All financial actions MUST use non-custodial wallets via Coinbase AgentKit with strict budget governors  
+**money Standard**: All financial actions MUST use non-custodial wallets via Coinbase AgentKit with strict budget governors  
 **Scalability Target**: Support 1,000+ concurrent agents (across campaigns/tenants)
 
 ---
@@ -18,22 +18,22 @@ The system SHALL use a Hierarchical Swarm architecture with distinct agent roles
 
 - **Planner (Strategist)**: Converts high-level goals into a structured queue of Tasks.
 - **Worker (Executor)**: Performs isolated, specialized work to produce Results.
-- **Judge (Validator)**: Evaluates Results for quality, safety, policy compliance, and confidence; routes outcomes.
+- **judgment (Validator)**: Evaluates Results for quality, safety, policy compliance, and confidence; routes outcomes.
 
 The architecture MUST support:
 
 - **Parallel execution**: Multiple Workers can execute Tasks concurrently.
 - **Fault isolation**: A Worker failure MUST NOT crash the swarm; Tasks MUST be retried or reassigned.
-- **Deterministic routing**: Judge decisions MUST be driven by policy rules and confidence thresholds.
+- **Deterministic routing**: judgment decisions MUST be driven by policy rules and confidence thresholds.
 - **Auditability**: The system MUST record task lineage and approvals for publishing and spending actions.
 
 ### 1.2 Data Flow
 
 1. **Planner → Orchestrator**: Planner submits `Task` objects to the orchestrator queue.
 2. **Orchestrator → Worker**: Orchestrator assigns Tasks to Workers based on capability/skill requirements.
-3. **Worker → Judge**: Worker returns `Result` objects for evaluation.
-4. **Judge → Orchestrator**: Judge returns an `evaluation` (approve/reject/escalate) and confidence, plus required next actions.
-5. **Orchestrator → Action**: If approved, orchestrator triggers MCP-based publishing/commerce; otherwise routes to retry/HITL queue.
+3. **Worker → judgment**: Worker returns `Result` objects for evaluation.
+4. **judgment → Orchestrator**: judgment returns an `evaluation` (approve/reject/escalate) and confidence, plus required next actions.
+5. **Orchestrator → Action**: If approved, orchestrator triggers MCP-based publishing/money; otherwise routes to retry/HITL queue.
 
 ### 1.3 Swarm + MCP Integration Diagram (Mermaid.js)
 
@@ -43,7 +43,7 @@ flowchart TD
   P[Planner Agent<br/>(Strategist)]
   O[Orchestrator<br/>(Dispatcher + Policy Router)]
   W1[Worker Pool<br/>(Executors)]
-  J[Judge Pool<br/>(Validator)]
+  J[judgment Pool<br/>(Validator)]
   H[Human Review Queue<br/>(HITL)]
   D[Dashboard<br/>(Ops + Review)]
 
@@ -116,13 +116,13 @@ flowchart TD
   - MUST produce a `Result` object with complete artifacts and evidence (sources, prompts, URLs, receipts).
   - MUST NOT publish content or spend funds directly unless the Task explicitly authorizes it AND the action is performed via orchestrator-controlled MCP calls.
 - **Outputs**
-  - A `Result` object returned to the Judge.
+  - A `Result` object returned to the judgment.
 - **Failure Modes (and required behavior)**
   - **MCP server unavailable**: MUST return `status=error` with retryable flag and diagnostic context.
   - **Timeout**: MUST return partial evidence (if any) and mark as retryable.
   - **Policy violation detected**: MUST stop, return `status=blocked`, and include violation details.
 
-### 2.3 Judge (Validator)
+### 2.3 judgment (Validator)
 
 - **Inputs**
   - A `Result` object
@@ -315,7 +315,7 @@ The `Task` object MUST validate against the following JSON Schema (draft 2020-12
 }
 ```
 
-### 4.2 JSON Schema: `Result` (Worker → Judge)
+### 4.2 JSON Schema: `Result` (Worker → judgment)
 
 The `Result` object MUST validate against the following JSON Schema (draft 2020-12).
 
@@ -397,7 +397,7 @@ Endpoints MUST be authenticated and audited. Endpoints are described at the cont
 - **GET `/api/v1/tasks`**
   - **MUST** support filtering by `tenant_id`, `campaign_id`, `status`, `risk_level`, and time range.
 - **GET `/api/v1/tasks/{task_id}`**
-  - **MUST** return the Task plus linked Results and Judge evaluations (by correlation).
+  - **MUST** return the Task plus linked Results and judgment evaluations (by correlation).
 - **POST `/api/v1/tasks/{task_id}/retry`**
   - **MUST** enqueue a retry attempt (bounded by `max_attempts`), preserving lineage.
 - **GET `/api/v1/review-queue`**
@@ -416,7 +416,7 @@ Endpoints MUST be authenticated and audited. Endpoints are described at the cont
 
 ### 5.1 Confidence-Based Tiers (Exact Thresholds)
 
-Every Judge evaluation MUST produce a `confidence_score` in \([0.0, 1.0]\). The system MUST route actions as follows:
+Every judgment evaluation MUST produce a `confidence_score` in \([0.0, 1.0]\). The system MUST route actions as follows:
 
 - **Tier 1 (Auto-Approve)**: `confidence_score > 0.90`
   - Allowed only when `risk_level` is `low` or `medium` AND the action is not sensitive/financial.
@@ -456,7 +456,7 @@ For any Task:
 
 ### 6.1 Container Strategy (Docker)
 
-- Each major service (Orchestrator, Planner service, Worker service, Judge service, Dashboard API) MUST be containerized.
+- Each major service (Orchestrator, Planner service, Worker service, judgment service, Dashboard API) MUST be containerized.
 - Containers MUST be immutable and versioned.
 - Secrets MUST be injected at runtime (never baked into images).
 
@@ -464,7 +464,7 @@ For any Task:
 
 The production deployment SHOULD run on Kubernetes and MUST support horizontal scaling:
 
-- Worker and Judge pools MUST support horizontal autoscaling based on queue depth and CPU/memory.
+- Worker and judgment pools MUST support horizontal autoscaling based on queue depth and CPU/memory.
 - Orchestrator MUST be deployed with high availability (at least 2 replicas) and leader-safe queue semantics.
 - MCP servers MUST be monitored as dependencies; degraded MCP availability MUST be visible in `/api/v1/health`.
 

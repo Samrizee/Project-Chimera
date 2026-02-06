@@ -8,7 +8,7 @@ Project Chimera SHALL implement a Hierarchical Swarm architecture consisting of:
 
 - Planner (Strategist)
 - Worker Pool (Executors)
-- Judge Pool (Validators)
+- judgment Pool (Validators)
 - Orchestrator (Dispatcher & Policy Router)
 
 The architecture MUST support:
@@ -39,7 +39,7 @@ All MCP activity MUST be logged and auditable.
 
 ### 1.3 Data Flow
 
-Planner → Orchestrator → Worker → Judge → Orchestrator → Action or HITL
+Planner → Orchestrator → Worker → judgment → Orchestrator → Action or HITL
 
 The Orchestrator is the sole authority for:
 
@@ -85,7 +85,7 @@ Failure Handling:
 
 ---
 
-### 2.3 Judge
+### 2.3 judgment
 
 Responsibilities:
 
